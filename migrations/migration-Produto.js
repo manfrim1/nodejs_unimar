@@ -3,14 +3,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Products', {
+    await queryInterface.createTable('Produto', {
       id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
       name: Sequelize.STRING,
       price: Sequelize.FLOAT,
       CategorieId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Categories',
+          model: 'Categoria',
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -20,6 +20,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Products');
+    await queryInterface.dropTable('Produto');
   },
 };

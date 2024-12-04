@@ -2,31 +2,31 @@ const { User } = require('../models');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-exports.createUser = async (req, res) => {
+exports.criarUser = async (req, res) => {
   try {
-    const newUser = await User.create(req.body);
+    const novoUsuario = await Usuario.create(req.body);
 
-    res.status(201).json(newUser);
+    res.status(201).json(novoUsuario);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error creating user");
+    res.status(500).send("Erro ao criar usuário");
   }
 };
 
 exports.loginUser = async (req, res) => {
   try {
-    const { user, pass } = req.body;
+    const { Usuario, pass } = req.body;
     const foundUser = await User.findOne({ where: { user } });
   
     if (!foundUser || !(await bcrypt.compare(pass, foundUser.pass))) {
-      return res.status(400).send("Invalid credentials");
+      return res.status(400).send("Erro login");
     }
   
-    const token = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET, { expiresIn: '24h' });
     res.json({ token });
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error logging in");
+    res.status(500).send("Erro");
   }
 };
 

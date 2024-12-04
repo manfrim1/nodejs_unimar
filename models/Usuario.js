@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define("User", {
+  const Usuario = sequelize.define("Usuario", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: DataTypes.STRING,
     email: DataTypes.STRING,
@@ -8,9 +8,9 @@ module.exports = (sequelize, DataTypes) => {
     pass: DataTypes.STRING,
   });
   
-  User.beforeCreate(async (user) => {
-    user.pass = await bcrypt.hash(user.pass, 10);
+  Usuario.beforeCreate(async (Usuario) => {
+    Usuario.pass = await bcrypt.hash(Usuario.pass, 10);
   });
 
-  return User;
+  return Usuario;
 };

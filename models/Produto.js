@@ -2,9 +2,9 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Product extends Model {
+  class Produto extends Model {
     static associate(models) {
-      Product.belongsTo(models.Categorie, { foreignKey: "CategorieId", as: "Categorie" });
+      Produto.belongsTo(models.Categorie, { foreignKey: "CategoriaId", as: "Categoria" });
     }
   }
 
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       price: DataTypes.FLOAT,
       CategorieId: DataTypes.INTEGER,
     },
-    { sequelize, modelName: 'Product', });
+    { sequelize, modelName: 'Produto', });
 
-  return Product;
+  return Produto;
 };
